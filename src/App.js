@@ -56,16 +56,16 @@ class App extends Component {
     } = this.state;
     let errors = {};
 
-    if (!firstName) {
-      errors.firstName = 'First name is required';
+    if (!validator.isAlpha(firstName)) {
+      errors.firstName = 'Please enter name using letters only';
     }
 
-    if (!lastName) {
-      errors.lastName = 'Last name is required';
+    if (!validator.isAlpha(lastName)) {
+      errors.lastName = 'Please enter name using letters only';
     }
 
-    if (!validator.isNumeric(age) || !validator.isLength(age, { min: 1, max: 3 })) {
-      errors.age = 'Age must be a number between 1 and 3 digits';
+    if (!validator.isInt(age)) {
+      errors.age = 'Age must be a integer';
     }
 
     if (!gender) {
@@ -77,26 +77,29 @@ class App extends Component {
     }
 
     if (!validator.isEmail(email)) {
-      errors.email = 'Email is not valid';
+      errors.email = 'Invalid email address';
     }
 
-    if (!validator.isLength(password, { min: 8 })) {
-      errors.password = 'Password must be at least 8 characters';
+    if (!validator.isStrongPassword(password, { min: 8, max: 16 })) {
+      errors.password = <li>Password must be at least 8 to 16 characters</li>
     }
 
-    if (password !== repeatPassword) {
-      errors.repeatPassword = 'Passwords do not match';
+    if (password.toLowerCase() == password) {
+      errors.password1 = <li>Password must contain one UpperCase letter</li>
+    }
+
+    if (password !== repeatPassword || repeatPassword === '') {
+      errors.repeatPassword = 'Password must be same';
     }
 
     if (!tos) {
-      errors.tos = 'You must agree to the terms and conditions';
+      errors.tos = 'Please agree to our terms and conditions';
     }
 
     if (Object.keys(errors).length > 0) {
       this.setState({ errors });
       return;
     }
-    // submit the form
   };
 
   render() {
@@ -114,120 +117,133 @@ class App extends Component {
     } = this.state;
 
     return (
-      <section className="vh-100" style={{
-        backgroundImage: "url(images/bg-img.jpg)",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-      }}>
+      <section className="vh-100">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
-            <div className="col-md-10 col-lg-6 col-xl-5">
+            <div className="col-md-10 col-lg-6 col-xl-6">
               <div className="card" style={{ borderRadius: '10px' }}>
-                <div className="card-body p-5">
-                  <h2 className="text-center mb-5">CREATE AN ACCOUNT</h2>
-                  <form onSubmit={this.handleSubmit} className="row g-3 border border-warning ">
-                    <div className="row g-1 ">
-                      <label className='form-label' htmlFor='firstNameID'>firstName:</label>
+                <div className="card-body p-3">
+                  <h3 className="text-center mb-3">CREATE AN ACCOUNT</h3>
+                  <form onSubmit={this.handleSubmit} className="row mx-5 p-3">
+                    <div className="row g-0">
+                      <span><i className="fa fa-user me-2"></i>
+                        <label className='form-label' htmlFor='firstNameID'> First name:</label></span>
                       <input
                         type="text"
+                        className='form-control'
                         id='firstNameID'
                         name="firstName"
                         value={firstName}
                         onChange={this.handleInputChange}
                       />
-                      {errors.firstName && <span>{errors.firstName}</span>}
+                      <p className='text-danger mb-0'><small>{errors.firstName}</small></p>
                     </div>
-                    <div className="row g-1 ">
-                      <label className='form-label' htmlFor='lastNameID'>
-                        Last Name:                        </label>
+                    <div className="row g-0 ">
+                      <span><i className="fa fa-user me-2"></i>
+                        <label className='form-label' htmlFor='lastNameID'> Last name:</label></span>
                       <input
                         type="text"
                         id='lastNameID'
+                        className='form-control'
                         name="lastName"
                         value={lastName}
                         onChange={this.handleInputChange}
                       />
-                      {errors.lastName && <span>{errors.lastName}</span>}
+                      <p className='text-danger mb-0'><small>{errors.lastName}</small></p>
                     </div>
-                    <div className="col-md-2 ">
-                      <label className='form-label' htmlFor='ageID'>Age:</label>
+                    <div className="col p-0 mt-2">
+                      <label className='form-label mb-0' htmlFor='ageID'>Age:</label>
                       <input
                         type="text"
                         id='ageID'
+                        className='form-control'
                         name="age"
                         value={age}
                         onChange={this.handleInputChange}
                       />
-                      {errors.age && <span>{errors.age}</span>}
+                      <p className='text-danger mb-0'><small>{errors.age}</small></p>
                     </div>
-                    <div className="col-md-3 ">
-                      <label className='form-label' htmlFor=''>Gender: </label>
-                      <select name="gender" value={gender} onChange={this.handleInputChange}>
-                        <option value="">Select</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                      </select>
-                      {errors.gender && <span>{errors.gender}</span>}
+                    <div className='scroll-down-container col-md-4 mt-2'>
+                      <div className="form-group">
+                        <span><i className="fa fa-venus-mars"></i>
+                          <label className='form-label mb-0'>Gender: </label></span>
+                        <select className='form-control' name="gender" value={gender} onChange={this.handleInputChange}>
+                          <option value="">Select</option>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                          <option value="Other">Other</option>
+                        </select>
+                        <p className='text-danger mb-0'><small>{errors.gender}</small></p>
+                      </div>
                     </div>
-                    <div className="col-md-3">
-                      <label className='form-label' htmlFor=''></label>
-                      Role:
-                      <select name="role" value={role} onChange={this.handleInputChange}>
-                        <option value="">Select</option>
-                        <option value="developer">Developer</option>
-                        <option value="seniorDeveloper">Senior Developer</option>
-                        <option value="leadEngineer">Lead Engineer</option>
-                        <option value="CTO">CTO</option>
-                      </select>
-                      {errors.role && <span>{errors.role}</span>}
+
+                    <div className='scroll-down-container col p-0 mt-2'>
+                      <div className="form-group"><label className='form-label mb-0' htmlFor=''>Role:</label>
+                        <select className='form-control' name="role" value={role} onChange={this.handleInputChange}>
+                          <option value="">Select</option>
+                          <option value="developer">Developer</option>
+                          <option value="seniorDeveloper">Senior Developer</option>
+                          <option value="leadEngineer">Lead Engineer</option>
+                          <option value="CTO">CTO</option>
+                        </select>
+                        <p className='text-danger mb-0'><small>{errors.role}</small></p>
+                      </div>
                     </div>
-                    <div className="row g-1 ">
-                      <label className='form-label' htmlFor='emailID'>
-                        Email:</label>
+                    <div className="row g-0 mt-2">
+                      <span><i className="fa fa-envelope me-2"></i>
+                        <label className='form-label' htmlFor='emailID'>
+                          Email:</label></span>
                       <input
-                        type="email"
+                        type="text"
+                        className='form-control'
                         id='emailID'
                         name="email"
                         value={email}
                         onChange={this.handleInputChange}
                       />
-                      {errors.email && <span>{errors.email}</span>}
+                      <p className='text-danger mb-0'><small>{errors.email}</small></p>
                     </div>
-                    <div className="row g-1 ">
-                      <label className='form-label' htmlFor='passwordID'>
-                        Password: </label>
+                    <div className="row g-0 ">
+                      <span><i className="fa fa-lock me-2"></i>
+                        <label className='form-label' htmlFor='passwordID'>
+                          Password: </label></span>
                       <input
                         type="password"
+                        className='form-control'
                         id='passwordID'
                         name="password"
                         value={password}
                         onChange={this.handleInputChange}
                       />
-                      {errors.password && <span>{errors.password}</span>}
+                      <p className='text-danger mb-0'><small>{errors.password}</small></p>
+                      <p className='text-danger mb-0'><small>{errors.password1}</small></p>
                     </div>
-                    <div className="row g-1 ">
-                      <label className='form-label' htmlFor=''>Repeat Password:</label>
+                    <div className="row g-0 ">
+                      <span><i className="fa fa-key me-2"></i>
+                        <label className='form-label' htmlFor='repeatPasswordID'>Repeat Password:</label></span>
                       <input
                         type="password"
+                        id='repeatPasswordID'
+                        className='form-control'
                         name="repeatPassword"
                         value={repeatPassword}
                         onChange={this.handleInputChange}
                       />
-                      {errors.repeatPassword && <span>{errors.repeatPassword}</span>}
+                      <p className='text-danger mb-0'><small>{errors.repeatPassword}</small></p>
                     </div>
-                    <div className="">
-                      <label className='form-label' htmlFor='tosID'></label>
+                    <div className="form-check d-flex justify-content-center g-2">
                       <input
                         type="checkbox"
+                        className='form-check-input me-2'
                         id='tosID'
                         name="tos"
                         checked={tos}
                         onChange={this.handleCheckboxChange}
                       />
-                      I Agree to terms and conditions
-                      {errors.tos && <span>{errors.tos}</span>}
+                      <label className='form-check-label' htmlFor="tosID"> I agree with all <a href="#">Terms and Conditions</a></label>
                     </div>
-                    <button type="submit">Sign Up</button>
+                    <p className='text-danger text-center mb-0'><small>{errors.tos}</small></p>
+                    <button type="submit" className='btn btn-warning mt-2'>Sign Up</button>
                   </form>
                 </div>
               </div>
