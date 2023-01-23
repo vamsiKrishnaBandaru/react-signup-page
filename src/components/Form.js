@@ -81,9 +81,28 @@ class Form extends Component {
       if (!validator.isEmail(email)) {
          errors.email = 'Please enter a valid email address'
       }
-
       if (!validator.isStrongPassword(password)) {
-         errors.password = 'Password must have a minimum of 8 characters long, one uppercase with one lowercase, one numeric and one special character.'
+         let message = 'Password must contain: '
+         let msg = ['minimum of 8 characters long, ', 'one numeric, ', 'one lowercase, ', 'one Uppercase, ', 'one character, ']
+
+         password.split('').map(word => {
+            if (isNaN(word)) {
+               if (!validator.isAlphanumeric(word)) {
+                  msg.splice(4, 1, "")
+               } else if (validator.isLowercase(word)) {
+                  msg.splice(2, 1, "")
+               } else if (validator.isUppercase(word)) {
+                  msg.splice(3, 1, "")
+               }
+            } else {
+               msg.splice(1, 1, "")
+            }
+            return
+         })
+         if (password.length >= 8) {
+            msg.splice(0, 1, "")
+         }
+         errors.password = message + msg.join(' ')
       }
 
       if (password !== repeatPassword || repeatPassword === '') {
