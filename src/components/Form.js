@@ -135,10 +135,13 @@ class Form extends Component {
                            <div className="card">
                               <div className="card-body p-3">
                                  <h3 className="text-center mb-3">CREATE AN ACCOUNT</h3>
+
                                  <form onSubmit={this.handleSubmit} className="row mx-5 p-3">
                                     <div className="row g-0">
-                                       <span><i className="fa fa-user me-2"></i>
-                                          <label className='form-label mb-0 mt-1' htmlFor='firstNameID'> First name</label></span>
+                                       <span>
+                                          <i className="fa fa-user me-2"></i>
+                                          <label className='form-label mb-0 mt-1' htmlFor='firstNameID'> First name</label>
+                                          </span>
                                        <input
                                           type="text"
                                           className='form-control'
@@ -149,6 +152,7 @@ class Form extends Component {
                                        />
                                        <p className='text-danger mb-0'><small>{errors.firstName}</small></p>
                                     </div>
+
                                     <div className="row g-0 ">
                                        <span><i className="fa fa-user me-2"></i>
                                           <label className='form-label mb-0 mt-1' htmlFor='lastNameID'> Last name</label></span>
@@ -174,10 +178,13 @@ class Form extends Component {
                                        />
                                        <p className='text-danger mb-0'><small>{errors.age}</small></p>
                                     </div>
+                                    
                                     <div className='scroll-down-container col-md-3 mt-2'>
                                        <div className="form-group">
-                                          <span><i className="fa fa-venus-mars"></i>
-                                             <label className='form-label mb-0'>Gender</label></span>
+                                          <span>
+                                             <i className="fa fa-venus-mars"></i>
+                                             <label className='form-label mb-0'>Gender</label>
+                                          </span>
                                           <select className='form-control' name="gender" value={gender} onChange={this.handleInput}>
                                              <option value="">Select</option>
                                              <option value="male">Male</option>
@@ -187,6 +194,7 @@ class Form extends Component {
                                           <p className='text-danger mb-0'><small>{errors.gender}</small></p>
                                        </div>
                                     </div>
+
                                     <div className='scroll-down-container col-md-4 p-0 mt-2'>
                                        <div className="form-group"><label className='form-label mb-0' htmlFor=''>Role</label>
                                           <select className='form-control' name="role" value={role} onChange={this.handleInput}>
@@ -199,6 +207,7 @@ class Form extends Component {
                                           <p className='text-danger mb-0'><small>{errors.role}</small></p>
                                        </div>
                                     </div>
+
                                     <div className="row g-0 mt-2">
                                        <span><i className="fa fa-envelope me-2"></i>
                                           <label className='form-label mb-0 mt-1' htmlFor='emailID'>
@@ -213,10 +222,13 @@ class Form extends Component {
                                        />
                                        <p className='text-danger mb-0'><small>{errors.email}</small></p>
                                     </div>
+
                                     <div className="row g-0 ">
-                                       <span><i className="fa fa-lock me-2"></i>
+                                       <span>
+                                          <i className="fa fa-lock me-2"></i>
                                           <label className='form-label mb-0 mt-1' htmlFor='passwordID'>
-                                             Password</label></span>
+                                             Password</label>
+                                       </span>
                                        <input
                                           type="password"
                                           className='form-control'
@@ -227,6 +239,7 @@ class Form extends Component {
                                        />
                                        <p className='text-danger mb-0'><small>{errors.password}</small></p>
                                     </div>
+
                                     <div className="row g-0 ">
                                        <span><i className="fa fa-key me-2"></i>
                                           <label className='form-label mb-0 mt-1' htmlFor='repeatPasswordID'>Repeat Password</label></span>
@@ -240,6 +253,7 @@ class Form extends Component {
                                        />
                                        <p className='text-danger mb-0'><small>{errors.repeatPassword}</small></p>
                                     </div>
+                                    
                                     <div className="form-check d-flex justify-content-center g-2">
                                        <input
                                           type="checkbox"
@@ -259,9 +273,7 @@ class Form extends Component {
                         </div>
                      </div>
                   </div >
-
                </section >
-
             }
 
             {
