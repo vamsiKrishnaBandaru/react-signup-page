@@ -1,13 +1,7 @@
-/* .ok {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid red;
-} */
-section {
-  background-image: url("../public/images/bg-img.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.text-danger{
+.text-danger {
   font-size: 0.82rem;
+  font-weight: 500;
+}
+.card {
+  border-radius: 1rem;
 }
