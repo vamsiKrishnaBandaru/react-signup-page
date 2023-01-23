@@ -134,14 +134,13 @@ class Form extends Component {
                         <div className="col-md-10 col-lg-6 col-xl-6">
                            <div className="card">
                               <div className="card-body p-3">
-                                 <h3 className="text-center mb-3">CREATE AN ACCOUNT</h3>
-
+                                 <h3 className="text-center m-0">CREATE AN ACCOUNT</h3>
                                  <form onSubmit={this.handleSubmit} className="row mx-5 p-3">
                                     <div className="row g-0">
                                        <span>
                                           <i className="fa fa-user me-2"></i>
                                           <label className='form-label mb-0 mt-1' htmlFor='firstNameID'> First name</label>
-                                          </span>
+                                       </span>
                                        <input
                                           type="text"
                                           className='form-control'
@@ -166,7 +165,7 @@ class Form extends Component {
                                        />
                                        <p className='text-danger mb-0'><small>{errors.lastName}</small></p>
                                     </div>
-                                    <div className="col p-0 mt-2">
+                                    <div className="col-md-12 col-12 p-0 mt-2 row-sm-12">
                                        <label className='form-label mb-0' htmlFor='ageID'>Age</label>
                                        <input
                                           type="text"
@@ -178,8 +177,8 @@ class Form extends Component {
                                        />
                                        <p className='text-danger mb-0'><small>{errors.age}</small></p>
                                     </div>
-                                    
-                                    <div className='scroll-down-container col-md-3 mt-2'>
+
+                                    <div className='scroll-down-container col-md-6 col-lg-6 row-sm-12 p-0 mt-2'>
                                        <div className="form-group">
                                           <span>
                                              <i className="fa fa-venus-mars"></i>
@@ -195,7 +194,7 @@ class Form extends Component {
                                        </div>
                                     </div>
 
-                                    <div className='scroll-down-container col-md-4 p-0 mt-2'>
+                                    <div className='scroll-down-container col-md-6 col-lg-6 row-sm-12 p-0 mt-2'>
                                        <div className="form-group"><label className='form-label mb-0' htmlFor=''>Role</label>
                                           <select className='form-control' name="role" value={role} onChange={this.handleInput}>
                                              <option value="">Select</option>
@@ -253,7 +252,7 @@ class Form extends Component {
                                        />
                                        <p className='text-danger mb-0'><small>{errors.repeatPassword}</small></p>
                                     </div>
-                                    
+
                                     <div className="form-check d-flex justify-content-center g-2">
                                        <input
                                           type="checkbox"

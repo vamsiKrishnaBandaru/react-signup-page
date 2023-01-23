@@ -4,12 +4,16 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-image: url("../public/images/bg-img.jpg");
+  background: url("../public/images/bg-img.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+@media (max-width: 768px) {
+  body {
+    background: url("../public/images/bg-img.jpg");
+    background-repeat: no-repeat;
+    background-size: fill;
+  }
 }
