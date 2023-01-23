@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import validator from 'validator';
+import React, { Component } from 'react'
+import validator from 'validator'
 import '../App.css'
+import SuccessMessage from './SuccessMessage'
 
 class Form extends Component {
    constructor(props) {
@@ -17,21 +18,21 @@ class Form extends Component {
          tos: false,
          errors: {},
          AllFieldsDone: false,
-      };
+      }
    }
 
    handleInput = (event) => {
       const {
          name,
          value
-      } = event.target;
+      } = event.target
 
       this.setState(
          {
             [name]: value
          }
-      );
-   };
+      )
+   }
 
    handleCheckbox = (event) => {
       this.setState(
@@ -53,9 +54,9 @@ class Form extends Component {
          password,
          repeatPassword,
          tos,
-      } = this.state;
+      } = this.state
 
-      let errors = {};
+      let errors = {}
 
       if (!validator.isAlpha(firstName)) {
          errors.firstName = 'Please enter name using letters only'
@@ -70,7 +71,7 @@ class Form extends Component {
       }
 
       if (!gender) {
-         errors.gender = 'Gender is required';
+         errors.gender = 'Choose one';
       }
 
       if (!role) {
@@ -78,7 +79,7 @@ class Form extends Component {
       }
 
       if (!validator.isEmail(email)) {
-         errors.email = 'Invalid email address'
+         errors.email = 'Please enter a valid email address'
       }
 
       if (!validator.isStrongPassword(password)) {
@@ -137,7 +138,7 @@ class Form extends Component {
                                  <form onSubmit={this.handleSubmit} className="row mx-5 p-3">
                                     <div className="row g-0">
                                        <span><i className="fa fa-user me-2"></i>
-                                          <label className='form-label' htmlFor='firstNameID'> First name:</label></span>
+                                          <label className='form-label mb-0 mt-1' htmlFor='firstNameID'> First name</label></span>
                                        <input
                                           type="text"
                                           className='form-control'
@@ -150,7 +151,7 @@ class Form extends Component {
                                     </div>
                                     <div className="row g-0 ">
                                        <span><i className="fa fa-user me-2"></i>
-                                          <label className='form-label' htmlFor='lastNameID'> Last name:</label></span>
+                                          <label className='form-label mb-0 mt-1' htmlFor='lastNameID'> Last name</label></span>
                                        <input
                                           type="text"
                                           id='lastNameID'
@@ -162,7 +163,7 @@ class Form extends Component {
                                        <p className='text-danger mb-0'><small>{errors.lastName}</small></p>
                                     </div>
                                     <div className="col p-0 mt-2">
-                                       <label className='form-label mb-0' htmlFor='ageID'>Age:</label>
+                                       <label className='form-label mb-0' htmlFor='ageID'>Age</label>
                                        <input
                                           type="text"
                                           id='ageID'
@@ -173,10 +174,10 @@ class Form extends Component {
                                        />
                                        <p className='text-danger mb-0'><small>{errors.age}</small></p>
                                     </div>
-                                    <div className='scroll-down-container col-md-4 mt-2'>
+                                    <div className='scroll-down-container col-md-3 mt-2'>
                                        <div className="form-group">
                                           <span><i className="fa fa-venus-mars"></i>
-                                             <label className='form-label mb-0'>Gender: </label></span>
+                                             <label className='form-label mb-0'>Gender</label></span>
                                           <select className='form-control' name="gender" value={gender} onChange={this.handleInput}>
                                              <option value="">Select</option>
                                              <option value="male">Male</option>
@@ -186,8 +187,8 @@ class Form extends Component {
                                           <p className='text-danger mb-0'><small>{errors.gender}</small></p>
                                        </div>
                                     </div>
-                                    <div className='scroll-down-container col p-0 mt-2'>
-                                       <div className="form-group"><label className='form-label mb-0' htmlFor=''>Role:</label>
+                                    <div className='scroll-down-container col-md-4 p-0 mt-2'>
+                                       <div className="form-group"><label className='form-label mb-0' htmlFor=''>Role</label>
                                           <select className='form-control' name="role" value={role} onChange={this.handleInput}>
                                              <option value="">Select</option>
                                              <option value="developer">Developer</option>
@@ -200,8 +201,8 @@ class Form extends Component {
                                     </div>
                                     <div className="row g-0 mt-2">
                                        <span><i className="fa fa-envelope me-2"></i>
-                                          <label className='form-label' htmlFor='emailID'>
-                                             Email:</label></span>
+                                          <label className='form-label mb-0 mt-1' htmlFor='emailID'>
+                                             Email</label></span>
                                        <input
                                           type="text"
                                           className='form-control'
@@ -214,8 +215,8 @@ class Form extends Component {
                                     </div>
                                     <div className="row g-0 ">
                                        <span><i className="fa fa-lock me-2"></i>
-                                          <label className='form-label' htmlFor='passwordID'>
-                                             Password: </label></span>
+                                          <label className='form-label mb-0 mt-1' htmlFor='passwordID'>
+                                             Password</label></span>
                                        <input
                                           type="password"
                                           className='form-control'
@@ -228,7 +229,7 @@ class Form extends Component {
                                     </div>
                                     <div className="row g-0 ">
                                        <span><i className="fa fa-key me-2"></i>
-                                          <label className='form-label' htmlFor='repeatPasswordID'>Repeat Password:</label></span>
+                                          <label className='form-label mb-0 mt-1' htmlFor='repeatPasswordID'>Repeat Password</label></span>
                                        <input
                                           type="password"
                                           id='repeatPasswordID'
@@ -264,10 +265,8 @@ class Form extends Component {
             }
 
             {
-               this.state.AllFieldsDone &&
-               <div className="d-flex row .justify-content-center align-items-center vh-100">
-                  <img src="https://uploads-ssl.webflow.com/5ef0df6b9272f7410180a013/60c0e28575cd7c21701806fd_q1cunpuhbdreMPFRSFLyfUXNzpqv_I5fz_plwv6gV3sMNXwUSPrq88pC2iJijEV7wERnKXtdTA0eE4HvdnntGo9AHAWn-IcMPKV-rZw1v75vlTEoLF4OdNqsRb7C6r7Mvzrm7fe4.png" className="mx-auto d-block col-md-5"></img>
-               </div>
+               this.state.AllFieldsDone && <SuccessMessage />
+
             }
          </>
       );
